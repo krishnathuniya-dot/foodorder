@@ -1,0 +1,102 @@
+/* Container */
+.addfood-container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Title */
+.addfood-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Form layout */
+.addfood-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Label */
+.addfood-container label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+  color: #444;
+}
+
+/* Inputs */
+.addfood-container input,
+.addfood-container select,
+.addfood-container textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+.addfood-container input:focus,
+.addfood-container select:focus,
+.addfood-container textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Textarea */
+.addfood-container textarea {
+  min-height: 100px;
+  resize: none;
+}
+
+/* Buttons */
+.addfood-container button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+/* Submit button */
+.addfood-container button[type="submit"] {
+  background: #28a745;
+  color: white;
+}
+
+.addfood-container button[type="submit"]:hover {
+  background: #218838;
+}
+
+/* Cancel button */
+.addfood-container button[type="button"] {
+  background: #dc3545;
+  color: white;
+  margin-left: 10px;
+}
+
+.addfood-container button[type="button"]:hover {
+  background: #c82333;
+}
+
+/* Button row */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/* File input styling */
+.addfood-container input[type="file"] {
+  padding: 5px;
+  border: none;
+}

@@ -1,0 +1,41 @@
+.containerg {
+  width: 1000px;
+  margin: 50px auto;
+  padding: 40px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+}
+
+.form-groupg {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputg {
+  padding: 8px;
+  width:500px;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.buttong {
+  padding: 10px 15px;
+  background-color: #2c6faa;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.buttong:hover {
+  background-color: #1f4f7a;
+}
+
+.successg {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}

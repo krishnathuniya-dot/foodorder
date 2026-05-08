@@ -1,0 +1,152 @@
+/* 🌍 Background */
+.yy-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  background: linear-gradient(135deg, #e3f2fd, #fce4ec);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 📦 Card */
+.yy-card {
+  width: 100%;
+  max-width: 1000px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+/* 🔥 Header */
+.yy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.yy-header h2 {
+  font-size: 22px;
+  color: #222;
+}
+
+/* 🔍 Search */
+.yy-search {
+  padding: 10px 14px;
+  width: 240px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.yy-search:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 8px rgba(25,118,210,0.2);
+}
+
+/* 📊 TABLE */
+.yy-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.yy-table thead {
+  background: linear-gradient(90deg, #1976d2, #42a5f5);
+  color: black;
+}
+
+.yy-table th {
+  padding: 14px;
+  font-size: 14px;
+}
+
+.yy-td {
+  padding: 14px 10px;
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+}
+
+/* 🌟 ROW */
+.yy-row {
+  transition: all 0.2s ease;
+}
+
+.yy-row:hover {
+  background: #f8fbff;
+}
+
+/* 🔢 INDEX */
+.yy-index span {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 50%;
+  background: #e3f2fd;
+  color: #1976d2;
+  font-weight: 600;
+}
+
+/* 🏷️ CATEGORY */
+.yy-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #42a5f5, #1e88e5);
+  color: #fff;
+  font-size: 13px;
+  box-shadow: 0 4px 10px rgba(30, 136, 229, 0.2);
+}
+
+/* 📅 DATE */
+.yy-date {
+  color: #666;
+}
+
+/* 🎯 ACTIONS */
+.yy-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* 🔘 BUTTONS */
+.yy-btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s ease;
+  color: white;
+}
+
+/* DELETE */
+.yy-delete {
+  background: linear-gradient(135deg, #ff5252, #e53935);
+}
+
+.yy-delete:hover {
+  transform: translateY(-1px);
+}
+
+/* EDIT */
+.yy-edit {
+  background: linear-gradient(135deg, #66bb6a, #43a047);
+}
+
+.yy-edit:hover {
+  transform: translateY(-1px);
+}
+
+/* ❌ NO DATA */
+.yy-no-data {
+  padding: 20px;
+  color: #888;
+  font-size: 14px;
+}

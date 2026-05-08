@@ -1,0 +1,160 @@
+/* Table Layout */
+.oi-table {
+  display: grid;
+  grid-template-columns: 80px 1fr 100px 150px 120px;
+  align-items: center;
+  padding: 12px 15px;
+}
+
+/* Header */
+.oi-header {
+  background: #222;
+  color: white;
+  font-weight: bold;
+}
+
+/* Rows */
+.oi-row {
+  background: #f5f5f5;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+/* Image */
+.oi-row img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Grand Total */
+.oi-grand-total {
+  margin-top: 20px;
+  background: #222;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 6px;
+}
+kkkk
+/* 🌍 Page */
+.oi-container {
+  padding: 20px;
+  background: #f3f3f3;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 🧾 Title */
+.oi-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* 📋 TOP TABLE */
+.oi-order-table {
+  width: 90%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid #cfcfcf;
+}
+
+/* Cells */
+.oi-order-table td,
+.oi-order-table th {
+  border: 1px solid #cfcfcf;
+  padding: 14px;
+  font-size: 14px;
+  color: #444;
+}
+
+/* Alternate rows */
+.oi-order-table tr:nth-child(even) td {
+  background: #f7f7f7;
+}
+
+/* Section Header */
+.oi-section-header {
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  color: #1a4fff;
+  background: #fff;
+}
+
+/* 🔴 Actions */
+.oi-action-links {
+  margin: 10px 0 20px;
+  font-size: 14px;
+}
+
+.oi-action-links span {
+  color: #d11a2a;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.oi-action-links span:hover {
+  text-decoration: underline;
+}
+
+/* 📦 ITEMS SECTION */
+.oi-items-section {
+  margin-top: 10px;
+}
+
+/* Header Row */
+.oi-table {
+  display: grid;
+  grid-template-columns: 80px 1fr 100px 150px 120px;
+  align-items: center;
+  border: 1px solid #cfcfcf;
+}
+
+/* Header */
+.oi-header {
+  background: #2b2b2b;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 10px;
+}
+
+/* Rows */
+.oi-row {
+  background: #fff;
+  padding: 12px 10px;
+  border-top: none;
+}
+
+/* Alternate row */
+.oi-row:nth-child(even) {
+  background: #f7f7f7;
+}
+
+/* Image */
+.oi-row img {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+/* Grand Total */
+.oi-grand-total {
+  display: flex;
+  justify-content: space-between;
+  background: #2b2b2b;
+  color: #fff;
+  padding: 14px 20px;
+  font-weight: bold;
+  border: 1px solid #2b2b2b;
+  border-top: none;
+  font-size: 16px;
+}

@@ -1,0 +1,110 @@
+/* Wrapper */
+.av-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f6f9fc, #e9eff5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Container */
+.av-container {
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.av-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Form */
+.av-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Input Group */
+.av-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.av-group label {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+/* Inputs */
+.av-group input,
+.av-group textarea {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+/* Focus Effect */
+.av-group input:focus,
+.av-group textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+/* Textarea */
+.av-group textarea {
+  resize: none;
+  min-height: 80px;
+}
+
+/* Image Preview */
+.av-preview {
+  margin-top: 10px;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Button */
+.av-btn {
+  margin-top: 10px;
+  padding: 12px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+/* Button Hover */
+.av-btn:hover {
+  background: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .av-container {
+    padding: 20px;
+  }
+
+  .av-title {
+    font-size: 22px;
+  }
+}

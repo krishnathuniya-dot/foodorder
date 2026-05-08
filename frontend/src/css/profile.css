@@ -1,0 +1,67 @@
+.profile-container {
+  padding: 40px;
+  background: #f5f5f5;
+  flex: 1;
+}
+
+.profile-box {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 700px;
+}
+
+.profile-box h2 {
+  margin-bottom: 20px;
+}
+
+.profile-box label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 500;
+}
+
+.profile-box input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.profile-box button {
+  margin-top: 20px;
+  background: red;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* ROW FOR 2 INPUTS */
+.row {
+  display: flex;
+  gap: 20px;
+}
+
+/* HALF WIDTH */
+.col {
+  flex: 1;
+}
+
+/* INPUT STYLE (better UI) */
+.profile-form input {
+  width: 100%;
+  padding: 12px;
+  background: #f3f3f3;
+  border: 1px solid #ddd; 
+  border: none;
+  border-radius: 6px;
+}

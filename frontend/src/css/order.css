@@ -1,0 +1,174 @@
+/* 🌍 Container */
+.order-container {
+  padding: 30px;
+  background: #f4f6fb;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+}
+
+/* 🏷 Title */
+.order-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #111827;
+}
+
+/* 🔍 Controls */
+.order-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* 🔎 Search */
+.search-box {
+  position: relative;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 14px 16px 14px 45px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  background: white;
+  transition: 0.2s;
+}
+
+.search-box input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  outline: none;
+}
+
+/* Icon */
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
+
+/* Count */
+.order-count {
+  font-size: 14px;
+  color: #374151;
+}
+
+.order-count span {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* 📋 Table */
+.order-table-wrapper {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Header */
+.order-table th {
+  text-align: left;
+  padding: 14px;
+  font-size: 13px;
+  background: #f9fafb;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Body */
+.order-table td {
+  padding: 14px;
+  font-size: 14px;
+  color: #374151;
+}
+
+/* Zebra */
+.order-table tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+/* Hover */
+.order-table tbody tr:hover {
+  background: #eef2ff;
+}
+
+/* Order ID */
+.order-id {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Amount */
+.amount {
+  font-weight: 600;
+  color: #16a34a;
+}
+
+/* View Button */
+.view-btn {
+  background: #e0e7ff;
+  color: #4f46e5;
+  padding: 6px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.view-btn:hover {
+  background: #4f46e5;
+  color: white;
+}
+
+/* No Data */
+.no-data {
+  text-align: center;
+  padding: 20px;
+  color: #9ca3af;
+}
+
+/* 📱 Mobile */
+@media (max-width: 768px) {
+  .order-container {
+    padding: 15px;
+  }
+
+  .order-table thead {
+    display: none;
+  }
+
+  .order-table tr {
+    display: block;
+    margin-bottom: 12px;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .order-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+  }
+
+  .order-table td::before {
+    font-weight: 600;
+    color: #6b7280;
+  }
+
+  .order-table td:nth-child(1)::before { content: "#"; }
+  .order-table td:nth-child(2)::before { content: "Order No"; }
+  .order-table td:nth-child(3)::before { content: "Date"; }
+  .order-table td:nth-child(4)::before { content: "Amount"; }
+}

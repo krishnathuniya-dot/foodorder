@@ -1,0 +1,207 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* NAVBAR */
+.fig-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.fig-logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* MENU */
+.fig-menu {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+/* LINKS (IMPORTANT for React Router) */
+.fig-menu a {
+  text-decoration: none;
+  color: #333;
+  font-size: 15px;
+  cursor: pointer;
+  position: relative;
+}
+
+/* HOVER LINE EFFECT */
+.fig-menu a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: orange;
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
+}
+
+.fig-menu a:hover::after {
+  width: 100%;
+}
+
+/* DROPDOWN */
+.fig-dropdown {
+  position: relative;
+}
+
+.fig-menu-link {
+  cursor: pointer;
+  position: relative;
+}
+
+/* Dropdown box */
+.fig-dropdown-box {
+  position: absolute;
+  top: 35px;
+  left: 0;
+  width: 200px;
+  background: white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  overflow: hidden;
+  animation: fi-fadeIn 0.3s ease;
+  z-index: 100;
+}
+
+/* DROPDOWN LINKS */
+.fig-dropdown-box a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+  transition: 0.2s;
+}
+
+.fig-dropdown-box a:hover {
+  background: #f5f5f5;
+  padding-left: 20px;
+}
+
+/* ANIMATION */
+@keyframes fi-fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* CART BUTTON */
+.fig-cart-btn {
+  background: #ff2e2e;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.fig-cart-btn:hover {
+  background: #e60000;
+}
+
+/* HERO SECTION */
+.fig-hero {
+  height: 500px;
+  background: url("https://https://images.unsplash.com/photo-1414235077428-338989a2e8c0")
+    no-repeat center/cover;
+  position: relative;
+}
+
+.fig-overlay {
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+/* TEXT */
+.fig-overlay h1 {
+  font-size: 42px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* SEARCH BOX */
+.fi-search-box {
+  display: flex;
+  width: 500px;
+  max-width: 90%;
+}
+
+.fi-search-box input {
+  flex: 1;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 25px 0 0 25px;
+  outline: none;
+}
+
+.fi-search-box button {
+  padding: 12px 25px;
+  border: none;
+  background: #ff2e2e;
+  color: white;
+  border-radius: 0 25px 25px 0;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .fi-menu {
+    display: none;
+  }
+}
+.cart-btn {
+  background: #1ab394;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Hover Effect */
+.cart-btn:hover {
+  background: #18a689;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Click Effect */
+.cart-btn:active {
+  transform: scale(0.96);
+}
+
+/* Optional: Icon size */
+.cart-btn svg {
+  font-size: 16px;
+}

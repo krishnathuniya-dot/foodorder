@@ -1,0 +1,124 @@
+/* 🌍 Base */
+.dash-container {
+  min-height: 100vh;
+  background: #f5f7fb;
+  padding: 30px;
+  font-family: "Inter", sans-serif;
+}
+
+/* 📦 Layout */
+.mainnn {
+  max-width: 1250px;
+  margin: auto;
+}
+
+/* 🔝 Topbar */
+.topbarrr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.topbarrr h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* Badge */
+.new-badge {
+  background: #111827;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.new-badge:hover {
+  background: #374151;
+}
+
+/* 🧱 Grid */
+.card-griddd {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+/* 🪟 Card */
+.carddd {
+  background: white;
+  border-radius: 14px;
+  padding: 40px;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #e5e7eb;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+/* Top accent line */
+.carddd::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  border-radius: 14px 14px 0 0;
+  background: #3b82f6;
+}
+
+/* Hover */
+.carddd:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* Title */
+.carddd h4 {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+/* Value */
+.carddd h1 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* 🎨 Accent colors per card */
+.carddd:nth-child(1)::before { background: #3b82f6; } /* blue */
+.carddd:nth-child(2)::before { background: #ef4444; } /* red */
+.carddd:nth-child(3)::before { background: #f59e0b; } /* yellow */
+.carddd:nth-child(4)::before { background: #6366f1; } /* indigo */
+.carddd:nth-child(5)::before { background: #10b981; } /* green */
+.carddd:nth-child(6)::before { background: #0ea5e9; } /* sky */
+.carddd:nth-child(7)::before { background: #8b5cf6; } /* purple */
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .dash-container {
+    padding: 20px;
+  }
+
+  .topbarrr {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .carddd {
+    padding: 18px;
+  }
+
+  .carddd h1 {
+    font-size: 24px;
+  }
+}

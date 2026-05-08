@@ -1,0 +1,174 @@
+/* 🌍 Container */
+.reg-container {
+  padding: 30px;
+  background: #f4f6fb;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+}
+
+/* 🏷 Title */
+.reg-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #111827;
+}
+
+/* 🔍 Controls */
+.reg-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* 🔎 Search */
+.search-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.search-wrapper input {
+  width: 100%;
+  padding: 14px 16px 14px 45px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.search-wrapper input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  outline: none;
+}
+
+/* Icon */
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
+
+/* Total */
+.reg-total {
+  font-size: 14px;
+  color: #374151;
+}
+
+.reg-total span {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* 📋 Table */
+.reg-table-wrapper {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.reg-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Header */
+.reg-table th {
+  text-align: left;
+  padding: 14px;
+  font-size: 13px;
+  background: #f9fafb;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Body */
+.reg-table td {
+  padding: 14px;
+  font-size: 14px;
+  color: #374151;
+}
+
+/* Zebra */
+.reg-table tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+/* Hover */
+.reg-table tbody tr:hover {
+  background: #eef2ff;
+}
+
+/* Name */
+.user-name {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Delete Button */
+.delete-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  padding: 7px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+  color: white;
+}
+
+/* No Data */
+.no-data {
+  text-align: center;
+  padding: 20px;
+  color: #9ca3af;
+}
+
+/* 📱 Mobile */
+@media (max-width: 768px) {
+  .reg-container {
+    padding: 15px;
+  }
+
+  .reg-table thead {
+    display: none;
+  }
+
+  .reg-table tr {
+    display: block;
+    margin-bottom: 12px;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .reg-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+  }
+
+  .reg-table td::before {
+    font-weight: 600;
+    color: #6b7280;
+  }
+
+  .reg-table td:nth-child(1)::before { content: "#"; }
+  .reg-table td:nth-child(2)::before { content: "Name"; }
+  .reg-table td:nth-child(3)::before { content: "Email"; }
+  .reg-table td:nth-child(4)::before { content: "Contact"; }
+  .reg-table td:nth-child(5)::before { content: "Date"; }
+}

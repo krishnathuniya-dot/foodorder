@@ -1,0 +1,171 @@
+/* 🌍 Container */
+.food-container {
+  padding: 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eef2f7, #f9fbfd);
+}
+
+/* 🏷 Title */
+.food-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* 🔍 Filters */
+.food-filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* 🔎 Search Box */
+.search-box {
+  position: relative;
+  flex: 1;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px 14px 10px 38px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: 0.3s;
+}
+
+.search-box input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+/* Select */
+.food-filters select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* 📋 Table Wrapper */
+.table-wrapper {
+  background: white;
+  border-radius: 12px;
+  overflow-x: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* Table */
+.food-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.food-table th {
+  background: #007bff;
+  color: white;
+  padding: 12px;
+}
+
+.food-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+/* Hover */
+.food-table tbody tr {
+  transition: 0.3s;
+}
+
+.food-table tbody tr:hover {
+  background: #f1f7ff;
+  transform: scale(1.01);
+}
+
+/* Badge */
+.category-badge {
+  background: #e3f2fd;
+  color: #007bff;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* Price */
+.price {
+  color: #28a745;
+  font-weight: bold;
+}
+
+/* Buttons */
+.action-btns {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 7px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.edit-btn {
+  background: #ffc107;
+}
+
+.edit-btn:hover {
+  background: #e0a800;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+}
+
+/* No Data */
+.no-data {
+  padding: 20px;
+  color: #777;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .food-filters {
+    flex-direction: column;
+  }
+
+  .food-table thead {
+    display: none;
+  }
+
+  .food-table tr {
+    display: block;
+    margin-bottom: 15px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .food-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+  }
+}
