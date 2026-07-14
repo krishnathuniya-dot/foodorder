@@ -17,9 +17,7 @@ const razorpay = new Razorpay({
 
 
 
-// ============================
-// 🛒 ADD TO CART
-// ============================
+
 router.post("/addcart", async (req, res) => {
   try {
     let { userId, foodId, quantity } = req.body;
@@ -121,53 +119,102 @@ router.delete("/removecart/:id", async (req, res) => {
 // ============================
 // 💳 CREATE RAZORPAY ORDER
 // ============================
-router.post("/payment/order", async (req, res) => {
-  try {
-    const { amount } = req.body;
+  router.post("/payment/order", async (req, res) => {
+    try {
+      const { amount } = req.body;
 
-    if (!amount) {
-      return res.status(400).json({ error: "Amount required" });
+      if (!amount) {
+        return res.status(400).json({ error: "Amount required" });
+      }
+
+      const order = await razorpay.orders.create({
+        amount: amount * 100,
+        currency: "INR",
+        receipt: "order_" + Date.now(),
+      });
+
+      res.json(order);
+
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
     }
-
-    const order = await razorpay.orders.create({
-      amount: amount * 100,
-      currency: "INR",
-      receipt: "order_" + Date.now(),
-    });
-
-    res.json(order);
-
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: err.message });
-  }
-});
+  });
 // ============================
 // 🔐 VERIFY PAYMENT
 // ============================
 router.post("/payment/verify", async (req, res) => {
   try {
+
     const {
       razorpay_order_id,
       razorpay_payment_id,
       razorpay_signature,
     } = req.body;
 
-    const body = razorpay_order_id + "|" + razorpay_payment_id;
+    console.log(req.body);
+
+    // 🔥 CREATE SIGNATURE
+
+    const body =
+      razorpay_order_id +
+      "|" +
+      razorpay_payment_id;
 
     const expectedSignature = crypto
-      .createHmac("sha256", "PUT_YOUR_NEW_SECRET_KEY_HERE")
+
+      .createHmac(
+        "sha256",
+
+        // ⚠️ REAL SECRET KEY
+        "yyYiZ1j4KcnwxOt7Wk2XgCMQ"
+      )
+
       .update(body.toString())
+
       .digest("hex");
 
-    if (expectedSignature === razorpay_signature) {
-      return res.json({ success: true });
+
+
+    console.log(
+      "EXPECTED => ",
+      expectedSignature
+    );
+
+    console.log(
+      "RECEIVED => ",
+      razorpay_signature
+    );
+
+
+
+    // ✅ VERIFY
+
+    if (
+      expectedSignature ===
+      razorpay_signature
+    ) {
+
+      return res.status(200).json({
+        success: true,
+      });
+
     } else {
-      return res.status(400).json({ success: false });
+
+      return res.status(400).json({
+        success: false,
+      });
+
     }
 
   } catch (err) {
-    res.status(500).json({ error: err.message });
+
+    console.log(err);
+
+    res.status(500).json({
+      error: err.message,
+    });
+
   }
 });
 

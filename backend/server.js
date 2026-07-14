@@ -18,7 +18,8 @@ app.use("/api", category);
 app.use("/api", addfood);
 app.use("/api", cart);
 
-mongoose.connect("mongodb://localhost:27017/foodorder")
+
+mongoose.connect("mongodb+srv://krishnathuniya_db_user:krishnathuniya12345@cluster0.6yreqku.mongodb.net/foodorder?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
 
