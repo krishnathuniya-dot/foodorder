@@ -1,4 +1,4 @@
-
+import './App.css';
 import { Routes, Route } from "react-router-dom";
 
 import Homenav from "./layout/Homenav";
@@ -7,7 +7,7 @@ import Nav from "./layout/Nav";
 
 import Header from "./component/Header";
 import Topnavbar from "./component/Topnavbar";
-import Footer from "./component/Footer";  
+import Footer from "./component/Footer";
 import Cart from "./component/Cart";
 import Menu from "./component/Menu";
 
