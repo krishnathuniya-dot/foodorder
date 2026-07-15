@@ -16,13 +16,13 @@ export default function Admin() {
   const fetchStats = async () => {
     try {
       const res = await Promise.all([
-        fetch("http://localhost:2340/api/order/orderss/count").then(r => r.json()),
-        fetch("http://localhost:2340/api/orderss/pendinglist/count").then(r => r.json()),
-        fetch("http://localhost:2340/api/orderss/accepted-list/count").then(r => r.json()),
-        fetch("http://localhost:2340/api/orderss/preparinglist/count").then(r => r.json()),
-        fetch("http://localhost:2340/api/orderss/outfordeliverylist/count").then(r => r.json()),
-        fetch("http://localhost:2340/api/orderss/deliveredlist/count").then(r => r.json()),
-        fetch("http://localhost:2340/api/reguser/user/count").then(r => r.json()),
+        fetch("https://foodorder-lafi.onrender.com/api/order/orderss/count").then(r => r.json()),
+        fetch("https://foodorder-lafi.onrender.com/api/orderss/pendinglist/count").then(r => r.json()),
+        fetch("https://foodorder-lafi.onrender.com/api/orderss/accepted-list/count").then(r => r.json()),
+        fetch("https://foodorder-lafi.onrender.com/api/orderss/preparinglist/count").then(r => r.json()),
+        fetch("https://foodorder-lafi.onrender.com/api/orderss/outfordeliverylist/count").then(r => r.json()),
+        fetch("https://foodorder-lafi.onrender.com/api/orderss/deliveredlist/count").then(r => r.json()),
+        fetch("https://foodorder-lafi.onrender.com/api/reguser/user/count").then(r => r.json()),
       ]);
 
       setStats({

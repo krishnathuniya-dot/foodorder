@@ -9,7 +9,7 @@ export default function Preparing() {
 
   const fetchOrders = async () => {
     try {
-      const res = await fetch("http://localhost:2340/api/orderss/preparinglist");
+      const res = await fetch("https://foodorder-lafi.onrender.com/api/orderss/preparinglist");
       const data = await res.json();
 
       if (data.success) {

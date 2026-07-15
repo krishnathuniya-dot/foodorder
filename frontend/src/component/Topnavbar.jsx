@@ -46,7 +46,7 @@ export default function Topnavbar() {
       return;
     }
 
-    const res = await fetch("http://localhost:2340/api/signup", {
+    const res = await fetch("https://foodorder-lafi.onrender.com/api/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +65,7 @@ export default function Topnavbar() {
   };
 
   const handleLogin = async () => {
-    const res = await fetch("http://localhost:2340/api/login", {
+    const res = await fetch("https://foodorder-lafi.onrender.com/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

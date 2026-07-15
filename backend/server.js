@@ -19,10 +19,10 @@ app.use("/api", addfood);
 app.use("/api", cart);
 
 
-mongoose.connect("mongodb+srv://krishnathuniya_db_user:krishnathuniya12345@cluster0.6yreqku.mongodb.net/foodorder?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect("mongodb+srv://krishnathuniya_db_user:krishna@cluster0.6yreqku.mongodb.net/foodorder?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
 
 app.listen(2340, () => {
   console.log("Server running on port 2340"); 
-});
+}); 

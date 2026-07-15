@@ -48,7 +48,7 @@ export default function Cart() {
   const fetchCart = async () => {
     try {
       const res = await fetch(
-        `http://localhost:2340/api/getcart/${userId}`
+        `https://foodorder-lafi.onrender.com/api/getcart/${userId}`
       );
 
       const data = await res.json();
@@ -94,7 +94,7 @@ export default function Cart() {
   const removeItem = async (id) => {
     try {
       await fetch(
-        `http://localhost:2340/api/removecart/${id}`,
+        `https://foodorder-lafi.onrender.com/api/removecart/${id}`,
         {
           method: "DELETE",
         }
@@ -135,7 +135,7 @@ export default function Cart() {
       // 🔥 CREATE ORDER
 
       const orderRes = await fetch(
-        "http://localhost:2340/api/payment/order",
+        "https://foodorder-lafi.onrender.com/api/payment/order",
         {
           method: "POST",
 
@@ -191,7 +191,7 @@ export default function Cart() {
             // 🔥 VERIFY PAYMENT
 
             const verifyRes = await fetch(
-              "http://localhost:2340/api/payment/verify",
+              "https://foodorder-lafi.onrender.com/api/payment/verify",
               {
                 method: "POST",
 
@@ -252,7 +252,7 @@ export default function Cart() {
 
               const placeOrderRes =
                 await fetch(
-                  "http://localhost:2340/api/order",
+                  "https://foodorder-lafi.onrender.com/api/order",
                   {
                     method: "POST",
 
@@ -407,7 +407,7 @@ export default function Cart() {
         };
 
         const res = await fetch(
-          "http://localhost:2340/api/order",
+          "https://foodorder-lafi.onrender.com/api/order",
           {
             method: "POST",
 
@@ -478,7 +478,7 @@ export default function Cart() {
               key={item._id}
             >
               <img
-                src={`http://localhost:2340/uploads/${item.foodId?.image1}`}
+                src={`https://foodorder-lafi.onrender.com/uploads/${item.foodId?.image1}`}
                 className="kur-cart-img"
                 alt=""
               />

@@ -9,7 +9,7 @@ export default function New() {
 
   const fetchOrders = async () => {
     try {
-      const res = await fetch("http://localhost:2340/api/orderss/deliverylist");
+      const res = await fetch("https://foodorder-lafi.onrender.com/api/orderss/deliverylist");
       const data = await res.json();
 
       // ❗ API response safe handling

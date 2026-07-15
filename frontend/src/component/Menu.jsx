@@ -36,7 +36,7 @@ export default function Menu() {
   const fetchFoods = async () => {
     try {
       const res = await fetch(
-        `http://localhost:2340/api/fooddata/${category}`
+        `https://foodorder-lafi.onrender.com/api/fooddata/${category}`
       );
       const data = await res.json();
       setFoods(data.data || []);
@@ -76,7 +76,7 @@ export default function Menu() {
 
     const quantity = qty[item._id] || 1;
 
-    await fetch("http://localhost:2340/api/addcart", {
+    await fetch("https://foodorder-lafi.onrender.com/api/addcart", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -122,7 +122,7 @@ export default function Menu() {
             <div className="menu-card" key={item._id}>
 
               <img
-                src={`http://localhost:2340/uploads/${item.image1}`}
+                src={`https://foodorder-lafi.onrender.com/uploads/${item.image1}`}
                 alt={item.itemname}
                 className="menu-img"
                 onError={(e) => {

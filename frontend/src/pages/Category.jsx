@@ -24,7 +24,7 @@ export default function Category() {
     }
 
     try {
-      const res = await fetch("http://localhost:2340/api/category", {
+      const res = await fetch("https://foodorder-lafi.onrender.com/api/category", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

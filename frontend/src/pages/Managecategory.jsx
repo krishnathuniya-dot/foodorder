@@ -8,7 +8,7 @@ export default function Managecategory() {
 
   const fetchCategories = async () => {
     try {
-      const res = await fetch("http://localhost:2340/api/categorydata");
+      const res = await fetch("https://foodorder-lafi.onrender.com/api/categorydata");
       const data = await res.json();
       setCategories(data.data || []);
     } catch (error) {
@@ -25,7 +25,7 @@ export default function Managecategory() {
     if (!confirmDelete) return;
 
     try {
-      await fetch(`http://localhost:2340/api/deletebrand/${id}`, {
+      await fetch(`https://foodorder-lafi.onrender.com/api/deletebrand/${id}`, {
         method: "DELETE",
       });
 

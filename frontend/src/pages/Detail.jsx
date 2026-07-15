@@ -7,7 +7,7 @@ export default function Detail() {
   const [order, setOrder] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:2340/api/orders/order/${orderNumber}`)
+    fetch(`https://foodorder-lafi.onrender.com/api/orders/order/${orderNumber}`)
       .then((res) => res.json())
       .then((data) => setOrder(data.order));
   }, [orderNumber]);

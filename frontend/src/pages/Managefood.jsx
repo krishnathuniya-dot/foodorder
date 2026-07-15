@@ -26,7 +26,7 @@ export default function Managefood() {
     if (!window.confirm("Delete this item?")) return;
 
     try {
-      const res = await fetch(`http://localhost:2340/api/deletefood/${id}`, {
+      const res = await fetch(`https://foodorder-lafi.onrender.com/api/deletefood/${id}`, {
         method: "DELETE",
       });
 

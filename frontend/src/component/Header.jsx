@@ -17,7 +17,7 @@ export default function Header() {
       setLoading(true);
 
       const res = await fetch(
-        `http://localhost:2340/api/search?query=${search}`
+        `https://foodorder-lafi.onrender.com/api/search?query=${search}`
       );
 
       const data = await res.json();

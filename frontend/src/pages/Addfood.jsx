@@ -57,7 +57,7 @@ export default function AddFood() {
         submitData.append("image1", image);
       }
 
-      const res = await fetch("http://localhost:2340/api/addfood", {
+      const res = await fetch("https://foodorder-lafi.onrender.com/api/addfood", {
         method: "POST",
         body: submitData,
       });
@@ -80,7 +80,7 @@ export default function AddFood() {
 
   const fetchBrands = async () => {
     try {
-      const res = await fetch("http://localhost:2340/api/categorydata");
+      const res = await fetch("https://foodorder-lafi.onrender.com/api/categorydata");
       const data = await res.json();
 
       if (res.ok) {

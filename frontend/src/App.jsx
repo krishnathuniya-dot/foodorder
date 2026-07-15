@@ -1,37 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+
 import { Routes, Route } from "react-router-dom";
-import Homenav from './layout/homenav'
-import Topnavbar from './component/Topnavbar'
-import Header from './component/Header'
-import Account from './pages/Account'
-import Nav from './layout/Nav'
-import Profile from './pages/Profile'
-import Changepassword from './pages/Changepassword'
-import Adminnav from './layout/ADminnav'
-import Admin from './pages/Admin'
-import Dashboardd from './pages/Dashboardd'
-import AddFood from './pages/Addfood'
-import Regusers from './pages/Regusers'
-import Category from './pages/Category'
-import Managecategory from './pages/Managecategory'
-import Managefood from './pages/Managefood'
-import Footer from './component/Footer'
-import Cart from './component/Cart'
-import Edit from './pages/Edit'
-import Menu from './component/Menu'
-import Order from './pages/Order'
-import Detail from './pages/Detail'
-import View from './pages/View'
-import Confirm from './pages/Confirm'
-import Out from './pages/Out'
-import New from './pages/New'
-import Deliver from './pages/Deliver'
-import Preparing from './pages/Preparing'
-import AdminLogin from './pages/AdminLogin'
+
+import Homenav from "./layout/Homenav";
+import Adminnav from "./layout/Adminnav";
+import Nav from "./layout/Nav";
+
+import Header from "./component/Header";
+import Topnavbar from "./component/Topnavbar";
+import Footer from "./component/Footer";  
+import Cart from "./component/Cart";
+import Menu from "./component/Menu";
+
+import Account from "./pages/Account";
+import Profile from "./pages/Profile";
+import Changepassword from "./pages/Changepassword";
+
+import Admin from "./pages/Admin";
+import Dashboardd from "./pages/Dashboardd";
+import AddFood from "./pages/Addfood";
+import Regusers from "./pages/Regusers";
+import Category from "./pages/Category";
+import Managecategory from "./pages/Managecategory";
+import Managefood from "./pages/Managefood";
+import Edit from "./pages/Edit";
+import Order from "./pages/Order";
+import Detail from "./pages/Detail";
+import View from "./pages/View";
+import Confirm from "./pages/Confirm";
+import Out from "./pages/Out";
+import New from "./pages/New";
+import Deliver from "./pages/Deliver";
+import Preparing from "./pages/Preparing";
+import AdminLogin from "./pages/AdminLogin";
 
 
 function App() {

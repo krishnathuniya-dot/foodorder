@@ -38,7 +38,7 @@ export default function Changepassword() {
   }
 
   try {
-    const response = await fetch("http://localhost:2340/api/changepassword", {
+    const response = await fetch("https://foodorder-lafi.onrender.com/api/changepassword", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

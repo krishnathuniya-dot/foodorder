@@ -13,7 +13,7 @@ export default function View() {
   const navigate = useNavigate(); 
 
   useEffect(() => {
-    fetch(`http://localhost:2340/api/orders/order/${orderNumber}`)
+    fetch(`https://foodorder-lafi.onrender.com/api/orders/order/${orderNumber}`)
       .then((res) => res.json())
       .then((data) => {
         setOrder(data.order);
@@ -27,7 +27,7 @@ export default function View() {
       setLoading(true);
 
       const res = await fetch(
-        `http://localhost:2340/api/update-order/${order._id}`,
+        `https://foodorder-lafi.onrender.com/api/update-order/${order._id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -110,7 +110,7 @@ export default function View() {
 
                 <td>
                   <img
-                    src={`http://localhost:2340/uploads/${item.foodId?.image1}`}
+                    src={`https://foodorder-lafi.onrender.com/uploads/${item.foodId?.image1}`}
                     alt=""
                   />
                 </td>

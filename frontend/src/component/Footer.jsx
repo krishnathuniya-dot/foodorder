@@ -39,7 +39,7 @@ export default function Footer() {
 
   const fetchFoods = async () => {
     try {
-      const res = await fetch("http://localhost:2340/api/fooddata");
+      const res = await fetch("https://foodorder-lafi.onrender.com/api/fooddata");
       const data = await res.json();
       setFoods(data.data || []);
     } catch (error) {
@@ -84,7 +84,7 @@ export default function Footer() {
 
     const quantity = qty[item._id] || 1;
 
-    await fetch("http://localhost:2340/api/addcart", {
+    await fetch("https://foodorder-lafi.onrender.com/api/addcart", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -145,11 +145,11 @@ export default function Footer() {
                 {!loaded[v._id] && <div className="skeleton"></div>}
 
                 <img
-                  src={`http://localhost:2340/uploads/${v.image1}`}
+                  src={`https://foodorder-lafi.onrender.com/uploads/${v.image1}`}
                   alt={v.itemname}
                   className={loaded[v._id] ? "img show" : "img"}
                   onClick={() => {
-                    setSelectedImg(`http://localhost:2340/uploads/${v.image1}`);
+                    setSelectedImg(`https://foodorder-lafi.onrender.com/uploads/${v.image1}`);
                     setZoom(1);
                   }}
                   onLoad={() =>

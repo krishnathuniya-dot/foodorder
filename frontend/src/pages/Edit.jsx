@@ -23,7 +23,7 @@ export default function Edit() {
   useEffect(() => {
     async function fetchFood() {
       try {
-        const res = await fetch(`http://localhost:2340/api/foodadd/${id}`);
+        const res = await fetch(`https://foodorder-lafi.onrender.com/api/foodadd/${id}`);
         const data = await res.json();
 
         if (!res.ok) {

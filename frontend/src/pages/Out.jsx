@@ -7,7 +7,7 @@ export default function Out() {
 
   const fetchOrders = async () => {
     try {
-      const res = await fetch("http://localhost:2340/api/orderss/outfordeliverylist");
+      const res = await fetch("https://foodorder-lafi.onrender.com/api/orderss/outfordeliverylist");
 
       const data = await res.json();
 

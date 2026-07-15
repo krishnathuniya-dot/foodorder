@@ -8,7 +8,7 @@ export default function Regusers() {
 
   const fetchQuotes = async () => {
     try {
-      const res = await fetch("http://localhost:2340/api/reguser");
+      const res = await fetch("https://foodorder-lafi.onrender.com/api/reguser");
       const data = await res.json();
       setQuotes(data.data || []);
     } catch (error) {

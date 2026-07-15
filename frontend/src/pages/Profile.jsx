@@ -15,7 +15,7 @@ export default function Profile() {
   useEffect(() => {
     if (!userId) return;
 
-    fetch(`http://localhost:2340/api/profile/${userId}`)
+    fetch(`https://foodorder-lafi.onrender.com/api/profile/${userId}`)
       .then(res => res.json())
       .then(data => {
         console.log("API DATA ", data);

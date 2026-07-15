@@ -15,7 +15,7 @@ export default function Account() {
 
   const fetchOrders = async () => {
     try {
-      const res = await fetch(`http://localhost:2340/api/orders/${userId}`);
+      const res = await fetch(`https://foodorder-lafi.onrender.com/api/orders/${userId}`);
 
       // 👇 Handle non-JSON response (IMPORTANT)
       if (!res.ok) {

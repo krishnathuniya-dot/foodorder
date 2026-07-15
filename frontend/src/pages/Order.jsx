@@ -9,7 +9,7 @@ export default function Order() {
 
   const fetchOrders = async () => {
     try {
-      const res = await fetch("http://localhost:2340/api/orderdata");
+      const res = await fetch("https://foodorder-lafi.onrender.com/api/orderdata");
       const data = await res.json();
       setOrders(data.data || []);
     } catch (error) {
