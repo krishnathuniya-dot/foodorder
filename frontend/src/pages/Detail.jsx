@@ -86,7 +86,7 @@ export default function Detail() {
           <div className="oi-table oi-row" key={index}>
             <div>
               <img
-                src={`http://localhost:2340/uploads/${item.foodId?.image1}`}
+                src={`https://foodorder-lafi.onrender.com/uploads/${item.foodId?.image1}`}
                 alt={item.itemname}
               />
             </div>

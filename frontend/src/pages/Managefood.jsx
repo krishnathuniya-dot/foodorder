@@ -10,7 +10,7 @@ export default function Managefood() {
 
   const fetchFoods = async () => {
     try {
-      const res = await fetch("http://localhost:2340/api/fooddata");
+      const res = await fetch("https://foodorder-lafi.onrender.com/api/fooddata");
       const data = await res.json();
       setFoods(data.data || []);
     } catch (error) {

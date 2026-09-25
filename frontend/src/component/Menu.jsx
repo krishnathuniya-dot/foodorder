@@ -38,6 +38,8 @@ export default function Menu() {
       const res = await fetch(
         `https://foodorder-lafi.onrender.com/api/fooddata/${category}`
       );
+        console.log("Food Data:", data);
+    console.log("Items:", data.data);
       const data = await res.json();
       setFoods(data.data || []);
     } catch (err) {

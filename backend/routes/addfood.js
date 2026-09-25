@@ -12,6 +12,7 @@ router.post(
     try {
       console.log("FILE:", req.file);
       console.log("BODY:", req.body);
+       console.log("🔥 ADDFOOD API HIT");
 
       const {
         foodcategory,
