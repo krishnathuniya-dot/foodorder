@@ -5,8 +5,7 @@ import "../css/cart.css";
 export default function Cart() {
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
-  const [paymentMethod, setPaymentMethod] =
-    useState("online");
+  const [paymentMethod, setPaymentMethod] = useState("online");
 
   const [address, setAddress] = useState({
     flat: "",
@@ -26,9 +25,13 @@ export default function Cart() {
 
   const loadRazorpay = () => {
     return new Promise((resolve) => {
-      const script = document.createElement(
-        "script"
-      );
+      // Already loaded
+      if (window.Razorpay) {
+        resolve(true);
+        return;
+      }
+
+      const script = document.createElement("script");
 
       script.src =
         "https://checkout.razorpay.com/v1/checkout.js";
@@ -46,16 +49,35 @@ export default function Cart() {
   // =========================================
 
   const fetchCart = async () => {
+    if (!userId) {
+      setCart([]);
+      return;
+    }
+
     try {
       const res = await fetch(
         `https://foodorder-lafi.onrender.com/api/getcart/${userId}`
       );
 
+      if (!res.ok) {
+        throw new Error(`HTTP Error: ${res.status}`);
+      }
+
       const data = await res.json();
 
-      setCart(data.data || []);
+      console.log("CART DATA:", data);
+
+      // Defensive response handling
+      const cartData = Array.isArray(data.data)
+        ? data.data
+        : Array.isArray(data.cart)
+        ? data.cart
+        : [];
+
+      setCart(cartData);
     } catch (error) {
-      console.log(error);
+      console.error("FETCH CART ERROR:", error);
+      setCart([]);
     }
   };
 
@@ -66,20 +88,16 @@ export default function Cart() {
   }, [userId]);
 
   // =========================================
-  // 💰 TOTAL
+  // 💰 CALCULATE TOTAL
   // =========================================
 
   useEffect(() => {
     let sum = 0;
 
     cart.forEach((item) => {
-      const price = Number(
-        item.foodId?.price || 0
-      );
+      const price = Number(item.foodId?.price || 0);
 
-      const qty = Number(
-        item.quantity || 1
-      );
+      const qty = Number(item.quantity || 1);
 
       sum += price * qty;
     });
@@ -93,16 +111,28 @@ export default function Cart() {
 
   const removeItem = async (id) => {
     try {
-      await fetch(
+      const res = await fetch(
         `https://foodorder-lafi.onrender.com/api/removecart/${id}`,
         {
           method: "DELETE",
         }
       );
 
+      const data = await res.json();
+
+      console.log("REMOVE CART:", data);
+
+      if (!res.ok) {
+        throw new Error(
+          data.message || "Unable to remove item"
+        );
+      }
+
       fetchCart();
     } catch (error) {
-      console.log(error);
+      console.error("REMOVE CART ERROR:", error);
+
+      alert(error.message || "Failed to remove item");
     }
   };
 
@@ -111,19 +141,26 @@ export default function Cart() {
   // =========================================
 
   const handleChange = (e) => {
-    setAddress({
-      ...address,
+    setAddress((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
 
   // =========================================
-  // 💳 HANDLE PAYMENT
+  // 💳 HANDLE ONLINE PAYMENT
   // =========================================
 
   const handlePayment = async () => {
     try {
-      // 🔥 LOAD SDK
+      if (!cart.length) {
+        alert("Cart Empty");
+        return;
+      }
+
+      // =========================================
+      // LOAD RAZORPAY SDK
+      // =========================================
 
       const isLoaded = await loadRazorpay();
 
@@ -132,7 +169,9 @@ export default function Cart() {
         return;
       }
 
-      // 🔥 CREATE ORDER
+      // =========================================
+      // CREATE RAZORPAY ORDER
+      // =========================================
 
       const orderRes = await fetch(
         "https://foodorder-lafi.onrender.com/api/payment/order",
@@ -140,8 +179,7 @@ export default function Cart() {
           method: "POST",
 
           headers: {
-            "Content-Type":
-              "application/json",
+            "Content-Type": "application/json",
           },
 
           body: JSON.stringify({
@@ -152,18 +190,17 @@ export default function Cart() {
 
       const orderData = await orderRes.json();
 
-      console.log(
-        "ORDER DATA => ",
-        orderData
-      );
+      console.log("RAZORPAY ORDER DATA:", orderData);
 
-      if (!orderData.id) {
-        alert("Order Creation Failed");
+      if (!orderRes.ok || !orderData.id) {
+        alert(
+          orderData.message || "Order Creation Failed"
+        );
         return;
       }
 
       // =========================================
-      // 💳 RAZORPAY OPTIONS
+      // RAZORPAY OPTIONS
       // =========================================
 
       const options = {
@@ -179,16 +216,16 @@ export default function Cart() {
 
         order_id: orderData.id,
 
-        handler: async function (
-          response
-        ) {
+        handler: async function (response) {
           try {
             console.log(
-              "RAZORPAY RESPONSE => ",
+              "RAZORPAY RESPONSE:",
               response
             );
 
-            // 🔥 VERIFY PAYMENT
+            // =========================================
+            // VERIFY PAYMENT
+            // =========================================
 
             const verifyRes = await fetch(
               "https://foodorder-lafi.onrender.com/api/payment/verify",
@@ -196,8 +233,7 @@ export default function Cart() {
                 method: "POST",
 
                 headers: {
-                  "Content-Type":
-                    "application/json",
+                  "Content-Type": "application/json",
                 },
 
                 body: JSON.stringify({
@@ -217,12 +253,12 @@ export default function Cart() {
               await verifyRes.json();
 
             console.log(
-              "VERIFY DATA => ",
+              "VERIFY DATA:",
               verifyData
             );
 
             // =========================================
-            // ✅ PAYMENT VERIFIED
+            // PAYMENT VERIFIED
             // =========================================
 
             if (verifyData.success) {
@@ -232,8 +268,7 @@ export default function Cart() {
                 paymentId:
                   response.razorpay_payment_id,
 
-                paymentMethod:
-                  "online",
+                paymentMethod: "online",
 
                 cart: cart.map((item) => ({
                   foodId:
@@ -248,7 +283,9 @@ export default function Cart() {
                 address,
               };
 
-              // 🔥 PLACE ORDER
+              // =========================================
+              // PLACE ORDER
+              // =========================================
 
               const placeOrderRes =
                 await fetch(
@@ -261,9 +298,7 @@ export default function Cart() {
                         "application/json",
                     },
 
-                    body: JSON.stringify(
-                      payload
-                    ),
+                    body: JSON.stringify(payload),
                   }
                 );
 
@@ -271,11 +306,14 @@ export default function Cart() {
                 await placeOrderRes.json();
 
               console.log(
-                "FINAL ORDER => ",
+                "FINAL ORDER:",
                 finalData
               );
 
-              if (finalData.success) {
+              if (
+                placeOrderRes.ok &&
+                finalData.success
+              ) {
                 alert(
                   `✅ Order Placed Successfully\nOrder No: ${finalData.orderNumber}`
                 );
@@ -285,7 +323,8 @@ export default function Cart() {
                 navigate("/");
               } else {
                 alert(
-                  "Order Place Failed"
+                  finalData.message ||
+                    "Order Place Failed"
                 );
               }
             } else {
@@ -294,7 +333,10 @@ export default function Cart() {
               );
             }
           } catch (error) {
-            console.log(error);
+            console.error(
+              "PAYMENT VERIFY ERROR:",
+              error
+            );
 
             alert(
               "Something Went Wrong"
@@ -304,9 +346,7 @@ export default function Cart() {
 
         prefill: {
           name: "Customer",
-
           email: "test@test.com",
-
           contact: "9999999999",
         },
 
@@ -320,27 +360,31 @@ export default function Cart() {
       };
 
       // =========================================
-      // 🔥 OPEN PAYMENT WINDOW
+      // OPEN RAZORPAY
       // =========================================
 
       const razor = new window.Razorpay(
         options
       );
 
-      razor.on("payment.failed", function (
-        response
-      ) {
-        console.log(
-          "PAYMENT FAILED => ",
-          response
-        );
+      razor.on(
+        "payment.failed",
+        function (response) {
+          console.log(
+            "PAYMENT FAILED:",
+            response
+          );
 
-        alert("Payment Failed");
-      });
+          alert("Payment Failed");
+        }
+      );
 
       razor.open();
     } catch (error) {
-      console.log(error);
+      console.error(
+        "PAYMENT ERROR:",
+        error
+      );
 
       alert("Payment Error");
     }
@@ -353,6 +397,7 @@ export default function Cart() {
   const placeOrder = async () => {
     if (!userId) {
       alert("Please Login");
+      navigate("/login");
       return;
     }
 
@@ -361,11 +406,15 @@ export default function Cart() {
       return;
     }
 
+    // =========================================
+    // ADDRESS VALIDATION
+    // =========================================
+
     if (
-      !address.flat ||
-      !address.street ||
-      !address.area ||
-      !address.city
+      !address.flat.trim() ||
+      !address.street.trim() ||
+      !address.area.trim() ||
+      !address.city.trim()
     ) {
       alert(
         "Please Fill Delivery Address"
@@ -375,77 +424,100 @@ export default function Cart() {
     }
 
     // =========================================
-    // 💳 ONLINE PAYMENT
+    // ONLINE PAYMENT
     // =========================================
 
     if (paymentMethod === "online") {
-      handlePayment();
+      await handlePayment();
+      return;
     }
 
     // =========================================
-    // 💵 COD
+    // COD
     // =========================================
 
-    else {
-      try {
-        const payload = {
-          userId,
+    try {
+      const payload = {
+        userId,
 
-          paymentMethod: "cod",
+        paymentMethod: "cod",
 
-          cart: cart.map((item) => ({
-            foodId:
-              item.foodId?._id ||
-              item.foodId,
+        cart: cart.map((item) => ({
+          foodId:
+            item.foodId?._id ||
+            item.foodId,
 
-            quantity: Number(
-              item.quantity || 1
-            ),
-          })),
+          quantity: Number(
+            item.quantity || 1
+          ),
+        })),
 
-          address,
-        };
+        address,
+      };
 
-        const res = await fetch(
-          "https://foodorder-lafi.onrender.com/api/order",
-          {
-            method: "POST",
+      const res = await fetch(
+        "https://foodorder-lafi.onrender.com/api/order",
+        {
+          method: "POST",
 
-            headers: {
-              "Content-Type":
-                "application/json",
-            },
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
 
-            body: JSON.stringify(payload),
-          }
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = await res.json();
+
+      console.log("COD ORDER:", data);
+
+      if (res.ok && data.success) {
+        alert(
+          `✅ COD Order Placed\nOrder No: ${data.orderNumber}`
         );
 
-        const data = await res.json();
+        setCart([]);
 
-        if (data.success) {
-          alert(
-            `✅ COD Order Placed\nOrder No: ${data.orderNumber}`
-          );
-
-          setCart([]);
-
-          navigate("/");
-        } else {
-          alert("Order Failed");
-        }
-      } catch (error) {
-        console.log(error);
+        navigate("/");
+      } else {
+        alert(
+          data.message || "Order Failed"
+        );
       }
+    } catch (error) {
+      console.error(
+        "COD ORDER ERROR:",
+        error
+      );
+
+      alert("Order Failed");
     }
   };
 
+  // =========================================
+  // 🖼 IMAGE ERROR
+  // =========================================
+
+  const handleImageError = (e) => {
+    e.target.src =
+      "https://via.placeholder.com/150?text=Food";
+  };
+
+  // =========================================
+  // UI
+  // =========================================
+
   return (
     <div className="kur-cart-vertical">
+
       {/* ========================================= */}
       {/* 🛒 CART */}
       {/* ========================================= */}
 
       <div className="kur-cart-box">
+
         <div className="kur-cart-top">
           <h2>🛒 Your Cart</h2>
 
@@ -463,52 +535,74 @@ export default function Cart() {
           <div></div>
         </div>
 
-        {cart.map((item) => {
-          const price = Number(
-            item.foodId?.price || 0
-          );
+        {cart.length === 0 ? (
+          <div className="empty-cart">
+            <h3>Your Cart is Empty 🛒</h3>
+          </div>
+        ) : (
+          cart.map((item) => {
+            const price = Number(
+              item.foodId?.price || 0
+            );
 
-          const qty = Number(
-            item.quantity || 1
-          );
+            const qty = Number(
+              item.quantity || 1
+            );
 
-          return (
-            <div
-              className="kur-cart-row"
-              key={item._id}
-            >
-              <img
-                src={`https://foodorder-lafi.onrender.com/uploads/${item.foodId?.image1}`}
-                className="kur-cart-img"
-                alt=""
-              />
-
-              <div>
-                {item.foodId?.itemname}
-              </div>
-
-              <div>{qty}</div>
-
-              <div>₹{price}</div>
-
-              <div>₹{price * qty}</div>
-
+            return (
               <div
-                className="kur-cart-delete"
-                onClick={() =>
-                  removeItem(item._id)
-                }
+                className="kur-cart-row"
+                key={item._id}
               >
-                🗑️
+
+                {/* =========================================
+                    CLOUDINARY IMAGE
+                ========================================= */}
+
+                <img
+                  src={item.foodId?.image1}
+                  className="kur-cart-img"
+                  alt={
+                    item.foodId?.itemname ||
+                    "Food"
+                  }
+                  onError={handleImageError}
+                />
+
+                <div>
+                  {item.foodId?.itemname ||
+                    "Food Item"}
+                </div>
+
+                <div>{qty}</div>
+
+                <div>₹{price}</div>
+
+                <div>
+                  ₹{price * qty}
+                </div>
+
+                <div
+                  className="kur-cart-delete"
+                  onClick={() =>
+                    removeItem(item._id)
+                  }
+                >
+                  🗑️
+                </div>
+
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        )}
 
         {cart.length > 0 && (
           <div className="kur-cart-total-row">
+
             <div></div>
+
             <div></div>
+
             <div></div>
 
             <div className="kur-total-label">
@@ -520,8 +614,10 @@ export default function Cart() {
             </div>
 
             <div></div>
+
           </div>
         )}
+
       </div>
 
       {/* ========================================= */}
@@ -529,38 +625,46 @@ export default function Cart() {
       {/* ========================================= */}
 
       <div className="kur-bottom-box">
+
         <h3>📍 Delivery Address</h3>
 
         <div className="kur-address-form">
+
           <input
             name="flat"
             placeholder="Flat / House No"
+            value={address.flat}
             onChange={handleChange}
           />
 
           <input
             name="street"
             placeholder="Street"
+            value={address.street}
             onChange={handleChange}
           />
 
           <input
             name="area"
             placeholder="Area"
+            value={address.area}
             onChange={handleChange}
           />
 
           <input
             name="landmark"
             placeholder="Landmark"
+            value={address.landmark}
             onChange={handleChange}
           />
 
           <input
             name="city"
             placeholder="City"
+            value={address.city}
             onChange={handleChange}
           />
+
         </div>
 
         {/* ========================================= */}
@@ -570,13 +674,13 @@ export default function Cart() {
         <h3>💳 Payment Method</h3>
 
         <div className="kur-payment">
+
           <label>
             <input
               type="radio"
               value="online"
               checked={
-                paymentMethod ===
-                "online"
+                paymentMethod === "online"
               }
               onChange={(e) =>
                 setPaymentMethod(
@@ -604,6 +708,7 @@ export default function Cart() {
 
             COD 💵
           </label>
+
         </div>
 
         {/* ========================================= */}
@@ -611,27 +716,33 @@ export default function Cart() {
         {/* ========================================= */}
 
         <div className="kur-summary">
+
           <div>
             Items Total: ₹{total}
           </div>
 
-          <div>Delivery: ₹40</div>
+          <div>
+            Delivery: ₹40
+          </div>
 
           <div className="kur-summary-final">
             Total: ₹{total + 40}
           </div>
+
         </div>
 
         {/* ========================================= */}
-        {/* 🚀 BUTTON */}
+        {/* 🚀 PLACE ORDER */}
         {/* ========================================= */}
 
         <button
           className="kur-place-btn"
           onClick={placeOrder}
+          disabled={!cart.length}
         >
           Place Order 🚀
         </button>
+
       </div>
     </div>
   );

@@ -1,49 +1,59 @@
 const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("cloudinary").v2;
 
-// uploads folder path
-const uploadDir = path.join(__dirname, "..", "uploads");
+// =====================================================
+// CLOUDINARY CONFIG
+// =====================================================
 
-// Create uploads folder if not exists
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
-// Multer storage
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadDir);
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
+// =====================================================
+// CLOUDINARY STORAGE
+// =====================================================
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+
+  params: {
+    folder: "krishna-dry-cleaning",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
   },
 });
 
-// File filter
-const fileFilter = (req, file, cb) => {
-  const allowedExt = /jpg|jpeg|png|webp/;
-  const ext = allowedExt.test(path.extname(file.originalname).toLowerCase());
+// =====================================================
+// FILE FILTER
+// =====================================================
 
+const fileFilter = (req, file, cb) => {
   const allowedMime = [
     "image/jpg",
     "image/jpeg",
     "image/png",
     "image/webp",
   ];
-  const mime = allowedMime.includes(file.mimetype);
 
-  if (ext && mime) {
+  if (allowedMime.includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb(new Error("Only image files are allowed"), false);
+    cb(new Error("Only JPG, JPEG, PNG and WEBP images are allowed"), false);
   }
 };
 
-// Multer upload
+// =====================================================
+// MULTER
+// =====================================================
+
 const upload = multer({
-  storage,
-  fileFilter,
+  storage: storage,
+  fileFilter: fileFilter,
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5 MB
+  },
 });
 
 module.exports = upload;

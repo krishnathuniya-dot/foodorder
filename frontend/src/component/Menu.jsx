@@ -12,22 +12,40 @@ export default function Menu() {
 
   const userId = localStorage.getItem("userId");
 
-  // 🔍 search from URL
+  // =====================================================
+  // SEARCH FROM URL
+  // =====================================================
+
   const query = new URLSearchParams(location.search);
   const search = query.get("search") || "";
 
-  // 🖼 CATEGORY BANNER IMAGES
+  // =====================================================
+  // CATEGORY BANNER IMAGES
+  // =====================================================
+
   const categoryImages = {
     all: "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
-    fastfood: "https://images.unsplash.com/photo-1606755962773-d324e0a13086",
-    veg: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe",
-    nonveg: "https://images.unsplash.com/photo-1604908177522-040f5f4f0f8d",
-    southindian: "https://images.unsplash.com/photo-1630383249896-424e482df921",
-    chinese: "https://images.unsplash.com/photo-1585032226651-759b368d7246",
-    pizza: "https://images.unsplash.com/photo-1601924582970-9238bcb495d9",
-    drinks: "https://images.unsplash.com/photo-1551024709-8f23befc6f87",
-    desserts: "https://images.unsplash.com/photo-1551024601-bec78aea704b",
+    fastfood:
+      "https://images.unsplash.com/photo-1606755962773-d324e0a13086",
+    veg:
+      "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe",
+    nonveg:
+      "https://images.unsplash.com/photo-1604908177522-040f5f4f0f8d",
+    southindian:
+      "https://images.unsplash.com/photo-1630383249896-424e482df921",
+    chinese:
+      "https://images.unsplash.com/photo-1585032226651-759b368d7246",
+    pizza:
+      "https://images.unsplash.com/photo-1601924582970-9238bcb495d9",
+    drinks:
+      "https://images.unsplash.com/photo-1551024709-8f23befc6f87",
+    desserts:
+      "https://images.unsplash.com/photo-1551024601-bec78aea704b",
   };
+
+  // =====================================================
+  // FETCH FOODS
+  // =====================================================
 
   useEffect(() => {
     fetchFoods();
@@ -38,21 +56,37 @@ export default function Menu() {
       const res = await fetch(
         `https://foodorder-lafi.onrender.com/api/fooddata/${category}`
       );
-        console.log("Food Data:", data);
-    console.log("Items:", data.data);
+
+      if (!res.ok) {
+        throw new Error(`HTTP Error: ${res.status}`);
+      }
+
       const data = await res.json();
-      setFoods(data.data || []);
+
+      console.log("Food Data:", data);
+      console.log("Items:", data.data);
+
+      setFoods(Array.isArray(data.data) ? data.data : []);
     } catch (err) {
-      console.log(err);
+      console.error("Food Fetch Error:", err);
+      setFoods([]);
     }
   };
 
-  // 🔥 SEARCH FILTER
+  // =====================================================
+  // SEARCH FILTER
+  // =====================================================
+
   const filteredFoods = foods.filter((item) =>
-    item.itemname.toLowerCase().includes(search.toLowerCase())
+    (item.itemname || "")
+      .toLowerCase()
+      .includes(search.toLowerCase())
   );
 
-  // ➕
+  // =====================================================
+  // INCREASE QUANTITY
+  // =====================================================
+
   const increaseQty = (id) => {
     setQty((prev) => ({
       ...prev,
@@ -60,7 +94,10 @@ export default function Menu() {
     }));
   };
 
-  // ➖
+  // =====================================================
+  // DECREASE QUANTITY
+  // =====================================================
+
   const decreaseQty = (id) => {
     setQty((prev) => ({
       ...prev,
@@ -68,7 +105,10 @@ export default function Menu() {
     }));
   };
 
-  // 🛒 ADD TO CART
+  // =====================================================
+  // ADD TO CART
+  // =====================================================
+
   const addToCart = async (item) => {
     if (!userId) {
       alert("Login first");
@@ -78,43 +118,91 @@ export default function Menu() {
 
     const quantity = qty[item._id] || 1;
 
-    await fetch("https://foodorder-lafi.onrender.com/api/addcart", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        userId,
-        foodId: item._id,
-        itemname: item.itemname,
-        price: item.price,
-        quantity,
-        image1: item.image1,
-      }),
-    });
+    try {
+      const res = await fetch(
+        "https://foodorder-lafi.onrender.com/api/addcart",
+        {
+          method: "POST",
 
-    alert("✅ Added to cart");
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            userId,
+            foodId: item._id,
+            itemname: item.itemname,
+            price: item.price,
+            quantity,
+            image1: item.image1,
+          }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to add cart");
+      }
+
+      alert("✅ Added to cart");
+
+      console.log("Cart Response:", data);
+    } catch (error) {
+      console.error("ADD CART ERROR:", error);
+
+      alert(error.message || "Something went wrong");
+    }
   };
+
+  // =====================================================
+  // IMAGE ERROR
+  // =====================================================
+
+  const handleImageError = (e) => {
+    e.target.src =
+      "https://via.placeholder.com/300x200?text=Food+Image";
+  };
+
+  // =====================================================
+  // UI
+  // =====================================================
 
   return (
     <div className="menu-container">
 
-      {/* 🔥 CATEGORY BANNER */}
+      {/* =================================================
+          CATEGORY BANNER
+      ================================================= */}
+
       <div className="category-banner">
         <img
           src={categoryImages[category] || categoryImages.all}
-          alt={category}
+          alt={category || "Food"}
         />
 
         <div className="banner-overlay">
-          <h1>{category?.toUpperCase()} FOOD</h1>
+          <h1>
+            {category
+              ? `${category.toUpperCase()} FOOD`
+              : "ALL FOOD"}
+          </h1>
         </div>
       </div>
 
-      {/* 🔍 TITLE */}
+      {/* =================================================
+          TITLE
+      ================================================= */}
+
       <h2>
-        {category} Food {search && `- Search: "${search}"`}
+        {category || "All"} Food{" "}
+        {search && `- Search: "${search}"`}
       </h2>
 
-      {/* 🍔 GRID */}
+      {/* =================================================
+          FOOD GRID
+      ================================================= */}
+
       <div className="menu-grid">
 
         {filteredFoods.length === 0 ? (
@@ -123,32 +211,67 @@ export default function Menu() {
           filteredFoods.map((item) => (
             <div className="menu-card" key={item._id}>
 
+              {/* =================================================
+                  CLOUDINARY IMAGE
+              ================================================= */}
+
               <img
-                src={`https://foodorder-lafi.onrender.com/uploads/${item.image1}`}
-                alt={item.itemname}
+                src={item.image1}
+                alt={item.itemname || "Food"}
                 className="menu-img"
-                onError={(e) => {
-                  e.target.src = "https://via.placeholder.com/150";
-                }}
+                onError={handleImageError}
               />
+
+              {/* =================================================
+                  FOOD NAME
+              ================================================= */}
 
               <h4>{item.itemname}</h4>
 
-              <div className="qty-box">
-                <button onClick={() => decreaseQty(item._id)}>-</button>
-                <span>{qty[item._id] || 1}</span>
-                <button onClick={() => increaseQty(item._id)}>+</button>
-              </div>
+              {/* =================================================
+                  QUANTITY
+              ================================================= */}
 
-              <div className="card-bottom">
-                <span className="price">₹{item.price}</span>
+              <div className="qty-box">
 
                 <button
+                  type="button"
+                  onClick={() => decreaseQty(item._id)}
+                >
+                  -
+                </button>
+
+                <span>
+                  {qty[item._id] || 1}
+                </span>
+
+                <button
+                  type="button"
+                  onClick={() => increaseQty(item._id)}
+                >
+                  +
+                </button>
+
+              </div>
+
+              {/* =================================================
+                  PRICE + CART
+              ================================================= */}
+
+              <div className="card-bottom">
+
+                <span className="price">
+                  ₹{item.price}
+                </span>
+
+                <button
+                  type="button"
                   className="order-btn"
                   onClick={() => addToCart(item)}
                 >
                   Add to Cart
                 </button>
+
               </div>
 
             </div>

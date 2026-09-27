@@ -2,9 +2,13 @@
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "body-parser": "^2.2.2",
+    "cloudinary": "^1.41.3",
     "cors": "^2.8.6",
+    "dotenv": "^18.0.4",
     "express": "^5.2.1",
     "mongoose": "^9.4.1",
+    "multer": "^2.4.0",
+    "multer-storage-cloudinary": "^4.0.0",
     "razorpay": "^2.9.6"
   }
 }
